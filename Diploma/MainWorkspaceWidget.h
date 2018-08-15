@@ -6,6 +6,7 @@
 
 #include "SpreadSheetPaneWidget.h"
 #include "ColSelectorWidget.h"
+#include "HistogramPaneWidget.h"
 
 class MainWorkspaceWidget : public QSplitter
 {
@@ -17,6 +18,7 @@ private:
 	void setupUi();
 
 	SpreadSheetPaneWidget *m_pSpreadsheetPaneWidget;
+	HistogramPaneWidget *m_pHistogramPaneWidget;
 	ColSelectorWidget *m_pColSelectorWidget;
 };
 

@@ -2,6 +2,7 @@
 #include <QListView>
 #include <QTreeView>
 #include <QTextEdit>
+#include "Histogram.h"
 
 MainWorkspaceWidget::MainWorkspaceWidget(QWidget *parent)
 	: QSplitter(parent)
@@ -19,12 +20,11 @@ void MainWorkspaceWidget::setupUi()
 
 	m_pSpreadsheetPaneWidget = new SpreadSheetPaneWidget();
 	m_pColSelectorWidget = new ColSelectorWidget();
-
-	QTextEdit *textedit = new QTextEdit;
+	m_pHistogramPaneWidget = new HistogramPaneWidget();
 	
 	addWidget(m_pColSelectorWidget);
 	addWidget(m_pSpreadsheetPaneWidget);
-	addWidget(textedit);
+	addWidget(m_pHistogramPaneWidget);
 
 	setStretchFactor(0, 1);
 	setStretchFactor(1, 5);
