@@ -1,17 +1,17 @@
 #ifndef HISTOGRAMPANEWIDGET_H
 #define HISTOGRAMPANEWIDGET_H
 
-#include <QTableView>
-#include "HistogramModel.h"
+#include <QWidget>
+#include "Histogram.h"
 
-class HistogramPaneWidget : public QTableView
+class HistogramPaneWidget : public QWidget
 {
 public:
 	HistogramPaneWidget(QWidget *parent = 0);
 	~HistogramPaneWidget();
 
 private:
-	HistogramModel *m_pModel;
+	CHistogram *m_pHistogram;
 };
 
 #endif // HISTOGRAMPANEWIDGET_H

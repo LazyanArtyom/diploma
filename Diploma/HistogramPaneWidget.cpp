@@ -1,22 +1,16 @@
 #include "HistogramPaneWidget.h"
-#include <QHeaderView>
-#include "HistogramDelegate.h"
+#include <QGridLayout>
 
 HistogramPaneWidget::HistogramPaneWidget(QWidget *parent)
-	: QTableView(parent)
+	: QWidget(parent)
 {
-	m_pModel = new HistogramModel();
-	setModel(m_pModel);
+	QGridLayout *pLayout = new QGridLayout();
+	setLayout(pLayout);
+	//setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-	HistogramDelegate *pDelegate = new HistogramDelegate();
+	QVector<int> vect = { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 12 };
 
-	setItemDelegate(pDelegate);
-	
-	resizeColumnsToContents();
-	resizeRowsToContents();
-
-	verticalHeader()->hide();
-	horizontalHeader()->hide();
+	pLayout->addWidget(new CHistogram(vect));
 }
 
 HistogramPaneWidget::~HistogramPaneWidget()

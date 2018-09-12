@@ -27,6 +27,6 @@ void MainWorkspaceWidget::setupUi()
 	addWidget(m_pHistogramPaneWidget);
 
 	setStretchFactor(0, 1);
-	setStretchFactor(1, 5);
+	setStretchFactor(1, 3);
 	setStretchFactor(2, 3);
 }
