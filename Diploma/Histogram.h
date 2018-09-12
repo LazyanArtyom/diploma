@@ -43,28 +43,32 @@ private:
 		CBin(int nX1, int nX2);
 		~CBin();
 
-		QRect getRect();
 		int getHeight();
 		QPair<int, int> getWidth();
-		void setScale(int nScale);
+		
 		void increaseHeight(int nVal);
+
 		void setRange(int nLow, int nHigh);
 		CRange* getRange();
 
 	private:
 		QPair<int, int> m_nBinWidth;
 		int m_nBinHeight;
-		int m_BinScale;
 		CRange* m_pRange;
 	};
 
-	int m_nWidht;
+	int m_nWidth;
 	int m_nHeight;
+	int m_nLeftMargin;
+	int m_nRightMargin;
+	int m_nTopMargin;
+	int m_nBottomMargin;
 	int m_nBinsCount;
 	int m_nMaxFrequencyCount;
 	int m_nBinsWidth;
 	int m_nMin;
 	int m_nMax;
+	int m_nYCordinatesOffset;
 
 	QVector<int> m_vectData;
 	QMap<int, int> m_mapFrequency;
