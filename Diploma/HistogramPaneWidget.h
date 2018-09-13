@@ -2,16 +2,17 @@
 #define HISTOGRAMPANEWIDGET_H
 
 #include <QWidget>
+#include <QScrollArea>
 #include "Histogram.h"
 
-class HistogramPaneWidget : public QWidget
+class HistogramPaneWidget : public QScrollArea
 {
 public:
 	HistogramPaneWidget(QWidget *parent = 0);
 	~HistogramPaneWidget();
 
 private:
-	CHistogram *m_pHistogram;
+	CPlot *m_pHistogram;
 };
 
 #endif // HISTOGRAMPANEWIDGET_H

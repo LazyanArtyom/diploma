@@ -1,17 +1,34 @@
-#ifndef CHistogram_H
-#define CHistogram_H
+#ifndef CPlot_H
+#define CPlot_H
 
 #include <QWidget>
 #include <QResizeEvent>
 #include <QPaintEvent>
 #include <QRect>
 
-class CHistogram : public QWidget
+class CPlot;
+
+class CHistogram final : public QWidget
 {
 public:
 	CHistogram(QVector<int> vectData, QWidget *pParent = 0);
 	~CHistogram();
 
+protected:
+	void resizeEvent(QResizeEvent *pEvent);
+
+private:
+	CPlot *m_pPlot;
+	QVector<int> m_vectData;
+};
+
+class CPlot final : public QWidget
+{
+public:
+	CPlot(QVector<int> vectData, QWidget *pParent = 0);
+	~CPlot();
+
+protected:
 	void resizeEvent(QResizeEvent *pEvent);
 	void paintEvent(QPaintEvent *pEvent);
 

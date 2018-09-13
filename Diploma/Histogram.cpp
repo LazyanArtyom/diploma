@@ -4,7 +4,7 @@
 #include <QtMath>
 #include <QFontMetrics>
 
-CHistogram::CHistogram(QVector<int> vectData, QWidget *pParent) : QWidget(pParent)
+CPlot::CPlot(QVector<int> vectData, QWidget *pParent) : QWidget(pParent)
 {
 	m_vectData = vectData;
 	m_nBinsCount = 0;
@@ -21,25 +21,24 @@ CHistogram::CHistogram(QVector<int> vectData, QWidget *pParent) : QWidget(pParen
 	m_nBottomMargin = 0;
 
 	m_nYCordinatesOffset = 0;
-
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	setMinimumWidth(300);
-	setMinimumHeight(300);
+	//setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	run();
 }
 
-CHistogram::~CHistogram()
+CPlot::~CPlot()
 {
 	clear();
 }
 
-void CHistogram::resizeEvent(QResizeEvent *pEvent)
+void CPlot::resizeEvent(QResizeEvent *pEvent)
 {
 	Q_UNUSED(pEvent);
 
-	m_nHeight = pEvent->size().height();
-	m_nWidth = pEvent->size().width();
+	m_nHeight = this->height();
+	m_nWidth = this->width();
+	//m_nHeight = pEvent->size().height();
+	//m_nWidth = pEvent->size().width();
 
 	QFont font("Arial", 14, QFont::Normal);
 	QFontMetrics fMetrics(font);
@@ -52,10 +51,9 @@ void CHistogram::resizeEvent(QResizeEvent *pEvent)
 	m_nWidth -= m_nLeftMargin;
 	m_nHeight -= m_nBottomMargin;
 
-	update();
 }
 
-void CHistogram::paintEvent(QPaintEvent *pEvent)
+void CPlot::paintEvent(QPaintEvent *pEvent)
 {
 	Q_UNUSED(pEvent);
 
@@ -70,13 +68,13 @@ void CHistogram::paintEvent(QPaintEvent *pEvent)
 	//drawFooter(&painter);
 }
 
-void CHistogram::drawPlot(QPainter *pPainter)
+void CPlot::drawPlot(QPainter *pPainter)
 {
 	drawAxes(pPainter);
 	drawBins(pPainter);
 }
 
-void CHistogram::drawAxes(QPainter *pPainter)
+void CPlot::drawAxes(QPainter *pPainter)
 {
 	pPainter->save();
 
@@ -129,7 +127,7 @@ void CHistogram::drawAxes(QPainter *pPainter)
 	pPainter->restore();
 }
 
-void CHistogram::drawBins(QPainter *pPainter)
+void CPlot::drawBins(QPainter *pPainter)
 {
 	pPainter->save();
 
@@ -164,7 +162,7 @@ void CHistogram::drawBins(QPainter *pPainter)
 	pPainter->restore();
 }
 
-void CHistogram::drawHeader(QPainter *pPainter)
+void CPlot::drawHeader(QPainter *pPainter)
 {
 	pPainter->save();
 	
@@ -176,12 +174,12 @@ void CHistogram::drawHeader(QPainter *pPainter)
 	pPainter->drawRect(rect);
 	pPainter->setOpacity(1);
 	pPainter->setFont(font);
-	pPainter->drawText(rect, Qt::AlignCenter, "CHistogram");
+	pPainter->drawText(rect, Qt::AlignCenter, "CPlot");
 
 	pPainter->restore();
 }
 
-void CHistogram::drawFooter(QPainter *pPainter)
+void CPlot::drawFooter(QPainter *pPainter)
 {
 	pPainter->save();
 	
@@ -195,12 +193,12 @@ void CHistogram::drawFooter(QPainter *pPainter)
 	pPainter->setOpacity(1);
 	pPainter->setFont(font);
 	pPainter->setPen(QPen(Qt::darkGray, 3, Qt::SolidLine));
-	pPainter->drawText(rect, Qt::AlignCenter, "CHistogram");
+	pPainter->drawText(rect, Qt::AlignCenter, "CPlot");
 
 	pPainter->restore();
 }
 
-void CHistogram::clear()
+void CPlot::clear()
 {
 	for (auto &pBin : m_lstBins)
 	{
@@ -211,7 +209,7 @@ void CHistogram::clear()
 	m_lstBins.clear();
 }
 
-void CHistogram::run()
+void CPlot::run()
 {
 	for (int i = 0; i < m_vectData.count(); i++)
 	{
@@ -244,46 +242,69 @@ void CHistogram::run()
 	m_nYCordinatesOffset = qCeil(m_nMaxFrequencyCount / 9.0);
 }
 
-CHistogram::CBin::CBin(int nX1, int nX2) : m_nBinHeight(0), m_pRange(nullptr)
+CPlot::CBin::CBin(int nX1, int nX2) : m_nBinHeight(0), m_pRange(nullptr)
 {
 	m_nBinWidth = QPair<int, int>(nX1, nX2);
 }
 
-CHistogram::CBin::~CBin()
+CPlot::CBin::~CBin()
 {
 	if (m_pRange != nullptr)
 		delete m_pRange;
 }
 
 
-int CHistogram::CBin::getHeight()
+int CPlot::CBin::getHeight()
 {
 	return m_nBinHeight;
 }
 
-QPair<int, int> CHistogram::CBin::getWidth()
+QPair<int, int> CPlot::CBin::getWidth()
 {
 	return m_nBinWidth;
 }
 
-void CHistogram::CBin::increaseHeight(int nVal)
+void CPlot::CBin::increaseHeight(int nVal)
 {
 	m_nBinHeight += nVal;
 }
 
-void CHistogram::CBin::setRange(int nLow, int nHigh)
+void CPlot::CBin::setRange(int nLow, int nHigh)
 {
 	m_pRange = new CRange(nLow, nHigh);
 }
 
-CHistogram::CRange* CHistogram::CBin::getRange()
+CPlot::CRange* CPlot::CBin::getRange()
 {
 	return m_pRange;
 }
 
-CHistogram::CRange::CRange(int nLow, int nHigh) : m_nLow(nLow), m_nHigh(nHigh) {}
+CPlot::CRange::CRange(int nLow, int nHigh) : m_nLow(nLow), m_nHigh(nHigh) {}
 
-bool CHistogram::CRange::inRange(int nValue)
+bool CPlot::CRange::inRange(int nValue)
 {
 	return (unsigned(nValue - m_nLow) <= m_nHigh - m_nLow);
+}
+
+CHistogram::CHistogram(QVector<int> vectData, QWidget *pParent) 
+	: m_vectData(vectData), QWidget(pParent), m_pPlot(nullptr)
+{
+	//setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	
+	setMinimumWidth(600);
+	//setMinimumHeight(600);
+	
+	setStyleSheet("border: 1px solid black;");
+
+	m_pPlot = new CPlot(m_vectData, this);
+}
+
+CHistogram::~CHistogram()
+{
+}
+
+void CHistogram::resizeEvent(QResizeEvent *pEvent)
+{
+	if (m_pPlot != nullptr)
+		m_pPlot->resize(this->width(), this->height());
 }
