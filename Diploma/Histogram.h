@@ -16,6 +16,7 @@ public:
 
 protected:
 	void resizeEvent(QResizeEvent *pEvent);
+	void wheelEvent(QWheelEvent *pEvent);
 
 private:
 	CPlot *m_pPlot;

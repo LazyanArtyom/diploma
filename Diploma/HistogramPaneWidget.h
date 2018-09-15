@@ -5,10 +5,10 @@
 #include <QScrollArea>
 #include "Histogram.h"
 
-class HistogramPaneWidget : public QScrollArea
+class HistogramPaneWidget : public QWidget
 {
 public:
-	HistogramPaneWidget(QWidget *parent = 0);
+	HistogramPaneWidget(QWidget *pParent = 0);
 	~HistogramPaneWidget();
 
 private:

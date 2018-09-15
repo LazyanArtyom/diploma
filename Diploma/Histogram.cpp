@@ -3,6 +3,8 @@
 #include <QPainter>
 #include <QtMath>
 #include <QFontMetrics>
+#include <QDebug>
+#include <QHBoxLayout>
 
 CPlot::CPlot(QVector<int> vectData, QWidget *pParent) : QWidget(pParent)
 {
@@ -21,7 +23,7 @@ CPlot::CPlot(QVector<int> vectData, QWidget *pParent) : QWidget(pParent)
 	m_nBottomMargin = 0;
 
 	m_nYCordinatesOffset = 0;
-	//setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
 	run();
 }
@@ -51,6 +53,11 @@ void CPlot::resizeEvent(QResizeEvent *pEvent)
 	m_nWidth -= m_nLeftMargin;
 	m_nHeight -= m_nBottomMargin;
 
+	qDebug() << "Plot";
+	qDebug() << "Height: " << width();
+	qDebug() << "Width: " << height();
+
+	QWidget::resizeEvent(pEvent);
 }
 
 void CPlot::paintEvent(QPaintEvent *pEvent)
@@ -289,14 +296,16 @@ bool CPlot::CRange::inRange(int nValue)
 CHistogram::CHistogram(QVector<int> vectData, QWidget *pParent) 
 	: m_vectData(vectData), QWidget(pParent), m_pPlot(nullptr)
 {
-	//setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	
-	setMinimumWidth(600);
-	//setMinimumHeight(600);
-	
-	setStyleSheet("border: 1px solid black;");
+	//setStyleSheet("border: 1px solid black;");
 
-	m_pPlot = new CPlot(m_vectData, this);
+	QHBoxLayout *pLayout = new QHBoxLayout();
+	setLayout(pLayout);
+
+	m_pPlot = new CPlot(m_vectData);
+
+	pLayout->addWidget(m_pPlot);
 }
 
 CHistogram::~CHistogram()
@@ -306,5 +315,17 @@ CHistogram::~CHistogram()
 void CHistogram::resizeEvent(QResizeEvent *pEvent)
 {
 	if (m_pPlot != nullptr)
-		m_pPlot->resize(this->width(), this->height());
+	{
+		qDebug() << "Histogram";
+		qDebug() << "Height: " << width();
+		qDebug() << "Width: " << height();
+	}
+
+	QWidget::resizeEvent(pEvent);
+}
+
+void CHistogram::wheelEvent(QWheelEvent *pEvent)
+{
+	m_pPlot->update();
+	QWidget::wheelEvent(pEvent);
 }
