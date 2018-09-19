@@ -58,10 +58,10 @@ void CHistogramPaneWidget::init()
 
 bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
 {
+	CHistogram *pHistogram = static_cast<CHistogram*>(pObj);
+
 	if (pEvent->type() == QEvent::MouseButtonRelease)
-	{
-		CHistogram *pHistogram = static_cast<CHistogram*>(pObj);
-		
+	{		
 		QSize nScreenSize = qApp->screens()[0]->size();
 
 		m_pHistogramDialogBox->setFixedSize(nScreenSize);
@@ -70,10 +70,15 @@ bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
 		m_pHistogramDialogBox->showHistogram();
 	}
 	else if (pEvent->type() == QEvent::Enter)
+	{
 		QApplication::setOverrideCursor(Qt::PointingHandCursor);
-
+		pHistogram->setStyleSheet("border: 3px solid #2980B9;");
+	}
 	else if (pEvent->type() == QEvent::Leave)
+	{
 		QApplication::restoreOverrideCursor();
+		pHistogram->setStyleSheet("border: 2px solid none;");
+	}
 
 	return QWidget::eventFilter(pObj, pEvent);;
 }
