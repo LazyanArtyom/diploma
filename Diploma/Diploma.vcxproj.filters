@@ -39,19 +39,19 @@
     <ClCompile Include="SpreadSheetPaneWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpreadSheetModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ColSelectorWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColSelectorModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Histogram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HistogramPaneWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramDialogBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramPainter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,13 +65,7 @@
     <QtMoc Include="SpreadSheetPaneWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SpreadSheetModel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="ColSelectorWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="ColSelectorModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -85,6 +79,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HistogramPaneWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramDialogBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramPainter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

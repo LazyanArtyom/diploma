@@ -1,5 +1,5 @@
-#ifndef MAINWORKSPACEWIDGET_H
-#define MAINWORKSPACEWIDGET_H
+#ifndef MainWorkspaceWidget_H
+#define MainWorkspaceWidget_H
 
 #include <QWidget>
 #include <QSplitter>
@@ -18,8 +18,8 @@ private:
 	void setupUi();
 
 	SpreadSheetPaneWidget *m_pSpreadsheetPaneWidget;
-	HistogramPaneWidget *m_pHistogramPaneWidget;
+	CHistogramPaneWidget *m_pHistogramPaneWidget;
 	ColSelectorWidget *m_pColSelectorWidget;
 };
 
-#endif
+#endif // MainWorkspaceWidget_H

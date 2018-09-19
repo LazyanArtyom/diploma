@@ -113,14 +113,14 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ColSelectorModel.cpp" />
     <ClCompile Include="ColSelectorWidget.cpp" />
     <ClCompile Include="Histogram.cpp" />
+    <ClCompile Include="HistogramDialogBox.cpp" />
+    <ClCompile Include="HistogramPainter.cpp" />
     <ClCompile Include="HistogramPaneWidget.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWIndow.cpp" />
     <ClCompile Include="MainWorkspaceWidget.cpp" />
-    <ClCompile Include="SpreadSheetModel.cpp" />
     <ClCompile Include="SpreadSheetPaneWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,16 +136,12 @@
     <QtMoc Include="SpreadSheetPaneWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SpreadSheetModel.h" />
-  </ItemGroup>
-  <ItemGroup>
     <QtMoc Include="ColSelectorWidget.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ColSelectorModel.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Histogram.h" />
+    <ClInclude Include="HistogramDialogBox.h" />
+    <ClInclude Include="HistogramPainter.h" />
     <ClInclude Include="HistogramPaneWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

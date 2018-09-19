@@ -1,37 +1,79 @@
 #include "HistogramPaneWidget.h"
+#include "HistogramPainter.h"
+#include "Histogram.h"
+
 #include <QGridLayout>
 #include <QScrollBar>
+#include <QMessageBox>
+#include <QApplication>
+#include <QSize>
+#include <QScreen>
 
-HistogramPaneWidget::HistogramPaneWidget(QWidget *pParent)
-	: QWidget(pParent)
+CHistogramPaneWidget::CHistogramPaneWidget(QWidget *pParent)
+	: m_pHistogramDialogBox(nullptr), m_pHistogramPainter(nullptr), QWidget(pParent)
 {
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	QGridLayout *pLayout = new QGridLayout();
-	setLayout(pLayout);
+	m_pHistogramPainter = new CHistogramPainter();
+	m_pHistogramDialogBox = new CHistogramDialogBox(this);
+	m_pHistogramDialogBox->setPainter(m_pHistogramPainter);
 
-	pLayout->setSizeConstraint(QLayout::SetMinimumSize);
+	m_pLayout = new QGridLayout();
+	setLayout(m_pLayout);
 
-	//setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+	// for setting layout max or min sizes
+	m_pLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
 
-	QVector<int> vect = { 5, 5, 5, 5, 5, 5, 5,5, 5, 5, 5,5, 7, 20, 20, 11, 11, 11, 12 };
+	m_pLayout->setSpacing(5);
+	m_pLayout->setMargin(5);
 
-	pLayout->setColumnMinimumWidth(0, 600);
-	pLayout->setRowMinimumHeight(0, 600);
-	pLayout->setRowMinimumHeight(1, 600);
-	pLayout->setRowMinimumHeight(2, 600);
-	pLayout->setRowMinimumHeight(3, 600);
-
-	pLayout->addWidget(new CHistogram(vect));
-
-	pLayout->addWidget(new CHistogram(vect));
-
-	pLayout->addWidget(new CHistogram(vect));
-	
-	pLayout->addWidget(new CHistogram(vect));
-	
-	pLayout->addWidget(new CHistogram(vect));
+	init();
 }
 
-HistogramPaneWidget::~HistogramPaneWidget()
+CHistogramPaneWidget::~CHistogramPaneWidget()
 {
+	delete m_pHistogramPainter;
+}
+
+void CHistogramPaneWidget::init()
+{
+	QVector<int> vect = { 5, 5, 5, 5, 5, 5, 5,5, 5, 5, 5,5, 5,5,5,5,5,5, 7, 20, 20, 11, 11, 11, 12 };
+	QVector<int> vect2 = { 7, 20, 20, 11, 11, 11, 12 };
+
+	m_pLayout->setColumnMinimumWidth(0, 400);
+	m_pLayout->setColumnMinimumWidth(1, 400);
+	m_pLayout->setRowMinimumHeight(0, 400);
+	//m_pLayout->setRowMinimumHeight(1, 400);
+	//pLayout->setRowMinimumHeight(3, 600);
+
+	//pLayout->addWidget(new CHistogram(vect));
+
+	//pLayout->addWidget(new CHistogram(vect));
+
+	//pLayout->addWidget(new CHistogram(vect));
+
+	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
+	m_pLayout->addWidget(new CHistogram(vect2, m_pHistogramPainter, this));
+	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
+	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
+}
+
+bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
+{
+	if (pEvent->type() == QEvent::MouseButtonRelease)
+	{
+		CHistogram *pHistogram = static_cast<CHistogram*>(pObj);
+		
+		QSize nScreenSize = qApp->screens()[0]->size();
+
+		m_pHistogramDialogBox->setFixedSize(nScreenSize);
+		m_pHistogramDialogBox->showMaximized();
+		m_pHistogramDialogBox->setConfig(pHistogram->getConfig());
+		m_pHistogramDialogBox->showHistogram();
+	}
+	else if (pEvent->type() == QEvent::Enter)
+		QApplication::setOverrideCursor(Qt::PointingHandCursor);
+
+	else if (pEvent->type() == QEvent::Leave)
+		QApplication::restoreOverrideCursor();
+
+	return QWidget::eventFilter(pObj, pEvent);;
 }

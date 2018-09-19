@@ -21,13 +21,12 @@ void MainWorkspaceWidget::setupUi()
 
 	m_pSpreadsheetPaneWidget = new SpreadSheetPaneWidget();
 	m_pColSelectorWidget = new ColSelectorWidget();
-	m_pHistogramPaneWidget = new HistogramPaneWidget();
+	m_pHistogramPaneWidget = new CHistogramPaneWidget();
 
 	QScrollArea *pScrollArea = new QScrollArea();
-	pScrollArea->setWidget(m_pHistogramPaneWidget);
 	pScrollArea->setWidgetResizable(true);
 
-	pScrollArea->setUpdatesEnabled(true);
+	pScrollArea->setWidget(m_pHistogramPaneWidget);
 
 	addWidget(m_pColSelectorWidget);
 	addWidget(m_pSpreadsheetPaneWidget);

@@ -1,18 +1,28 @@
-#ifndef HISTOGRAMPANEWIDGET_H
-#define HISTOGRAMPANEWIDGET_H
+#ifndef HistogramPaneWidget_H
+#define HistogramPaneWidget_H
 
 #include <QWidget>
-#include <QScrollArea>
-#include "Histogram.h"
+#include <QGridLayout>
 
-class HistogramPaneWidget : public QWidget
+#include "HistogramDialogBox.h"
+
+class CHistogramPainter;
+
+class CHistogramPaneWidget : public QWidget
 {
 public:
-	HistogramPaneWidget(QWidget *pParent = 0);
-	~HistogramPaneWidget();
+	CHistogramPaneWidget(QWidget *pParent = 0);
+	~CHistogramPaneWidget();
+
+	void init();
+
+protected:
+	bool eventFilter(QObject * pObj, QEvent *pEvent);
 
 private:
-	CPlot *m_pHistogram;
+	CHistogramDialogBox *m_pHistogramDialogBox;
+	CHistogramPainter *m_pHistogramPainter;
+	QGridLayout *m_pLayout;
 };
 
-#endif // HISTOGRAMPANEWIDGET_H
+#endif // HistogramPaneWidget_H

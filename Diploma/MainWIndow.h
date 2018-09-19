@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MainWindow_H
+#define MainWindow_H
 
 #include <QMainWindow>
 #include <QMenuBar>
@@ -18,4 +18,4 @@ private:
 	QAction *m_pRunAct;
 };
 
-#endif // MAINWINDOW_H
+#endif // MainWindow_H
