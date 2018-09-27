@@ -7,6 +7,8 @@
 #include "SpreadSheetPaneWidget.h"
 #include "ColSelectorWidget.h"
 #include "HistogramPaneWidget.h"
+#include "HistogramReviewPaneWidget.h"
+#include "HistogramPainter.h"
 
 class MainWorkspaceWidget : public QSplitter
 {
@@ -17,9 +19,12 @@ public:
 private:
 	void setupUi();
 
-	SpreadSheetPaneWidget *m_pSpreadsheetPaneWidget;
+	//SpreadSheetPaneWidget *m_pSpreadsheetPaneWidget;
 	CHistogramPaneWidget *m_pHistogramPaneWidget;
+	CHistogramReviewPaneWidget *m_pHistogramReviewPaneWidget;
 	ColSelectorWidget *m_pColSelectorWidget;
+
+	CHistogramPainter *m_pHistogramPainter;
 };
 
 #endif // MainWorkspaceWidget_H

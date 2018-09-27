@@ -3,26 +3,31 @@
 
 #include <QWidget>
 #include <QGridLayout>
-
-#include "HistogramDialogBox.h"
+#include "Histogram.h"
 
 class CHistogramPainter;
 
 class CHistogramPaneWidget : public QWidget
 {
+	Q_OBJECT
 public:
 	CHistogramPaneWidget(QWidget *pParent = 0);
 	~CHistogramPaneWidget();
 
 	void init();
 
+	void setPainter(CHistogramPainter *pPainter);
+	CHistogramPainter* getPainter() const;
+
 protected:
-	bool eventFilter(QObject * pObj, QEvent *pEvent);
+	bool eventFilter(QObject *pObj, QEvent *pEvent);
 
 private:
-	CHistogramDialogBox *m_pHistogramDialogBox;
 	CHistogramPainter *m_pHistogramPainter;
 	QGridLayout *m_pLayout;
+
+signals:
+	void sigHistogramChecked(t_sHistogramConfig &oCfg);
 };
 
 #endif // HistogramPaneWidget_H

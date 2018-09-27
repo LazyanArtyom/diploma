@@ -4,11 +4,12 @@
 #include <QMap>
 #include <QtMath>
 #include "Histogram.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	
+
 	MainWIndow main;
 	main.show();
 		

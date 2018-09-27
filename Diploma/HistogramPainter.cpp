@@ -1,7 +1,7 @@
 #include "HistogramPainter.h"
 #include <QtMath>
 
-CHistogramPainter::CHistogramPainter()
+CHistogramPainter::CHistogramPainter() : m_sTitle("")
 {
 }
 
@@ -136,7 +136,7 @@ void CHistogramPainter::drawHeader(QPainter *pPainter)
 	pPainter->setPen(QPen(Qt::darkGray, 1, Qt::SolidLine));
 	pPainter->drawLine(0, nHeaderHeight, m_oCfg.nWidth + m_oCfg.nLeftMargin, nHeaderHeight);
 	pPainter->setFont(font);
-	pPainter->drawText(rect, Qt::AlignCenter, "Histogram");
+	pPainter->drawText(rect, Qt::AlignCenter, m_sTitle);
 
 	pPainter->restore();
 
@@ -158,7 +158,6 @@ void CHistogramPainter::drawFooter(QPainter *pPainter)
 
 	QFont font("Arial", nFooterHeight / 2, QFont::Normal);
 	pPainter->setPen(QPen(Qt::darkGray, 3, Qt::SolidLine));
-	//pPainter->drawRect(rect);
 	pPainter->setFont(font);
 	pPainter->setPen(QPen(Qt::darkGray, 3, Qt::SolidLine));
 	pPainter->drawText(rect, Qt::AlignCenter, "N_ColName");
@@ -170,6 +169,11 @@ void CHistogramPainter::drawFooter(QPainter *pPainter)
 	m_oCfg.nHeight -= nFooterHeight;
 
 	drawPlot(pPainter);
+}
+
+void CHistogramPainter::setTitle(const QString sTitle)
+{
+	m_sTitle = sTitle;
 }
 
 void CHistogramPainter::clear()

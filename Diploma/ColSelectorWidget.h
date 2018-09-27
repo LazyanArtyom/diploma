@@ -14,7 +14,7 @@ public:
 	ColSelectorModel(QObject *parent = 0);
 	~ColSelectorModel();
 
-	void addCols(QStringList lstColNames);
+	void addCols(const QStringList lstColNames);
 
 protected:
 	// Inherited via QAbstractListModel
@@ -25,7 +25,6 @@ protected:
 
 private:
 	QStringList m_lstColnames;
-
 	QSet<QPersistentModelIndex> m_lstCheckedItems;
 };
 

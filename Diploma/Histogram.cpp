@@ -1,15 +1,15 @@
 #include "Histogram.h"
-#include "HistogramPainter.h"
 #include <QPainter>
 #include <QtMath>
 #include <QFontMetrics>
-#include <QDebug>
 #include <QHBoxLayout>
-#include <QApplication>
+#include "HistogramPaneWidget.h"
+#include "HistogramPainter.h"
 
-CHistogram::CHistogram(QVector<int> vectData, CHistogramPainter *pHistogramPainter, QWidget *pParent) 
-	: m_vectData(vectData), m_pHistogramPainter(pHistogramPainter), QWidget(pParent)
+CHistogram::CHistogram(QVector<int> vectData, QWidget *pParent) 
+	: m_vectData(vectData), m_bIsCalculated(false), QWidget(pParent)
 {
+	m_pHistogramPainter = static_cast<CHistogramPaneWidget *>(pParent)->getPainter();
 	installEventFilter(pParent);
 	run();
 }
@@ -33,7 +33,7 @@ void CHistogram::updateConfig()
 	m_oCfg.nHeight -= m_oCfg.nBottomMargin;
 }
 
-t_sHistogramConfig CHistogram::getConfig()
+t_sHistogramConfig CHistogram::getConfig() const
 {
 	return m_oCfg;
 }
@@ -42,9 +42,14 @@ void CHistogram::paintEvent(QPaintEvent *pEvent)
 {
 	Q_UNUSED(pEvent);
 
-	updateConfig();
-	QPainter painter(this);
-	m_pHistogramPainter->draw(&painter, m_oCfg);
+	if (m_bIsCalculated)
+	{
+		updateConfig();
+		QPainter painter(this);
+
+		m_pHistogramPainter->setTitle("Histogram Title");
+		m_pHistogramPainter->draw(&painter, m_oCfg);
+	}
 }
 
 void CHistogram::run()
@@ -83,5 +88,5 @@ void CHistogram::run()
 
 	m_oCfg.nYCordinatesOffset = qCeil(m_oCfg.nMaxFrequencyCount / 9.0);
 
-	m_oCfg.bIsCalculated = true;
+	m_bIsCalculated = true;
 }

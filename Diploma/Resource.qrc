@@ -3,5 +3,6 @@
         <file>Resources/icons/open.png</file>
         <file>Resources/icons/run.png</file>
         <file>Resources/icons/histogram.png</file>
+        <file>Resources/icons/close.png</file>
     </qresource>
 </RCC>

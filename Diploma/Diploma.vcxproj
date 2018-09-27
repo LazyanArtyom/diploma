@@ -115,7 +115,7 @@
   <ItemGroup>
     <ClCompile Include="ColSelectorWidget.cpp" />
     <ClCompile Include="Histogram.cpp" />
-    <ClCompile Include="HistogramDialogBox.cpp" />
+    <ClCompile Include="HistogramReviewPaneWidget.cpp" />
     <ClCompile Include="HistogramPainter.cpp" />
     <ClCompile Include="HistogramPaneWidget.cpp" />
     <ClCompile Include="main.cpp" />
@@ -140,9 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Histogram.h" />
-    <ClInclude Include="HistogramDialogBox.h" />
+    <QtMoc Include="HistogramReviewPaneWidget.h" />
     <ClInclude Include="HistogramPainter.h" />
-    <ClInclude Include="HistogramPaneWidget.h" />
+    <QtMoc Include="HistogramPaneWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

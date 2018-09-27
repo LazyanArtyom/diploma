@@ -7,7 +7,7 @@
 ColSelectorModel::ColSelectorModel(QObject *parent)
 	: QStringListModel(parent)
 {
-	m_lstColnames << "Hello1" << "Hello2" << "Hello3" << "Hello4" << "Hello5";
+	m_lstColnames << "Bin" << "Data" << "Parameter" << "DieX" << "DieY";
 	setStringList(m_lstColnames);
 }
 
@@ -15,7 +15,7 @@ ColSelectorModel::~ColSelectorModel()
 {
 }
 
-void ColSelectorModel::addCols(QStringList lstColNames)
+void ColSelectorModel::addCols(const QStringList lstColNames)
 {
 	m_lstColnames = lstColNames;
 }

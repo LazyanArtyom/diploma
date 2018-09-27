@@ -1,21 +1,13 @@
 #include "HistogramPaneWidget.h"
 #include "HistogramPainter.h"
-#include "Histogram.h"
 
 #include <QGridLayout>
 #include <QScrollBar>
-#include <QMessageBox>
 #include <QApplication>
-#include <QSize>
-#include <QScreen>
 
 CHistogramPaneWidget::CHistogramPaneWidget(QWidget *pParent)
-	: m_pHistogramDialogBox(nullptr), m_pHistogramPainter(nullptr), QWidget(pParent)
+	: m_pHistogramPainter(nullptr), QWidget(pParent)
 {
-	m_pHistogramPainter = new CHistogramPainter();
-	m_pHistogramDialogBox = new CHistogramDialogBox(this);
-	m_pHistogramDialogBox->setPainter(m_pHistogramPainter);
-
 	m_pLayout = new QGridLayout();
 	setLayout(m_pLayout);
 
@@ -24,36 +16,42 @@ CHistogramPaneWidget::CHistogramPaneWidget(QWidget *pParent)
 
 	m_pLayout->setSpacing(5);
 	m_pLayout->setMargin(5);
-
-	init();
 }
 
 CHistogramPaneWidget::~CHistogramPaneWidget()
 {
-	delete m_pHistogramPainter;
 }
 
 void CHistogramPaneWidget::init()
 {
-	QVector<int> vect = { 5, 5, 5, 5, 5, 5, 5,5, 5, 5, 5,5, 5,5,5,5,5,5, 7, 20, 20, 11, 11, 11, 12 };
-	QVector<int> vect2 = { 7, 20, 20, 11, 11, 11, 12 };
+	m_pLayout->setColumnMinimumWidth(0, 300);
+	m_pLayout->setColumnMinimumWidth(1, 300);
+	for (int i = 0; i < 10; i++)
+	{
+		QVector<int> vect;
+		for (int j = 0; j < 10; j++)
+			vect.push_back((qrand() % 99));
 
-	m_pLayout->setColumnMinimumWidth(0, 400);
-	m_pLayout->setColumnMinimumWidth(1, 400);
-	m_pLayout->setRowMinimumHeight(0, 400);
-	//m_pLayout->setRowMinimumHeight(1, 400);
-	//pLayout->setRowMinimumHeight(3, 600);
+		CHistogram *pHistogram = new CHistogram(vect, this);
+		m_pLayout->addWidget(pHistogram);
+		/*
+		if (i == 0)
+			emit sigHistogramChecked(pHistogram->getConfig());
+			*/
 
-	//pLayout->addWidget(new CHistogram(vect));
+		if (i < 10 / 2)
+			m_pLayout->setRowMinimumHeight(i, 300);
+	}
+}
 
-	//pLayout->addWidget(new CHistogram(vect));
+void CHistogramPaneWidget::setPainter(CHistogramPainter *pPainter)
+{
+	m_pHistogramPainter = pPainter;
+}
 
-	//pLayout->addWidget(new CHistogram(vect));
-
-	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
-	m_pLayout->addWidget(new CHistogram(vect2, m_pHistogramPainter, this));
-	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
-	m_pLayout->addWidget(new CHistogram(vect, m_pHistogramPainter, this));
+CHistogramPainter* CHistogramPaneWidget::getPainter() const
+{
+	return m_pHistogramPainter;
 }
 
 bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
@@ -62,12 +60,7 @@ bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
 
 	if (pEvent->type() == QEvent::MouseButtonRelease)
 	{		
-		QSize nScreenSize = qApp->screens()[0]->size();
-
-		m_pHistogramDialogBox->setFixedSize(nScreenSize);
-		m_pHistogramDialogBox->showMaximized();
-		m_pHistogramDialogBox->setConfig(pHistogram->getConfig());
-		m_pHistogramDialogBox->showHistogram();
+		emit sigHistogramChecked(pHistogram->getConfig());
 	}
 	else if (pEvent->type() == QEvent::Enter)
 	{

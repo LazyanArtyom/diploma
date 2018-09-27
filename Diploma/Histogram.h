@@ -20,7 +20,6 @@ typedef struct SHistogramConfig
 	int nMinValue;
 	int nMaxValue;
 	int nYCordinatesOffset;
-	bool bIsCalculated;
 	QMap<int, int> mapFrequency;
 
 	inline SHistogramConfig()
@@ -36,7 +35,6 @@ typedef struct SHistogramConfig
 		nMinValue(0),
 		nMaxValue(10),
 		nYCordinatesOffset(2),
-		bIsCalculated(false),
 		mapFrequency(QMap<int, int>())
 	{}
 
@@ -45,11 +43,11 @@ typedef struct SHistogramConfig
 class CHistogram final : public QWidget
 {
 public:
-	CHistogram(QVector<int> vectData, CHistogramPainter *pHistogramPainter, QWidget *pParent = 0);
+	CHistogram(QVector<int> vectData, QWidget *pParent = 0);
 	~CHistogram();
 
 	void updateConfig();
-	t_sHistogramConfig getConfig();
+	t_sHistogramConfig getConfig() const;
 
 protected:
 	void paintEvent(QPaintEvent *pEvent);
@@ -57,6 +55,8 @@ protected:
 private:
 	t_sHistogramConfig m_oCfg;
 	CHistogramPainter *m_pHistogramPainter;
+
+	bool m_bIsCalculated;
 
 	void run();
 

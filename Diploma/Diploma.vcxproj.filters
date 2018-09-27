@@ -48,10 +48,10 @@
     <ClCompile Include="HistogramPaneWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HistogramDialogBox.cpp">
+    <ClCompile Include="HistogramPainter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HistogramPainter.cpp">
+    <ClCompile Include="HistogramReviewPaneWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,6 +68,12 @@
     <QtMoc Include="ColSelectorWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="HistogramPaneWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="HistogramReviewPaneWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Resource.qrc">
@@ -76,12 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Histogram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HistogramPaneWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HistogramDialogBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HistogramPainter.h">

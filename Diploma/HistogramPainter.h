@@ -21,11 +21,15 @@ public:
 	void drawHeader(QPainter *pPainter);
 	void drawFooter(QPainter *pPainter);
 
+	void setTitle(const QString sTitle);
+
 	void clear();
 
 private:
 	t_sHistogramConfig m_oCfg;
 	QList<CBin*> m_lstBins;
+
+	QString m_sTitle;
 };
 
 class CRange
