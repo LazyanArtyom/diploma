@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include "flowLayout.h"
 #include "Histogram.h"
 
 class CHistogramPainter;
@@ -18,6 +19,8 @@ public:
 
 	void setPainter(CHistogramPainter *pPainter);
 	CHistogramPainter* getPainter() const;
+
+	void updateGeometry();
 
 protected:
 	bool eventFilter(QObject *pObj, QEvent *pEvent);

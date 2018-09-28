@@ -35,11 +35,19 @@ void CHistogramReviewPaneWidget::updateConfig()
 
 void CHistogramReviewPaneWidget::paintEvent(QPaintEvent *pEvent)
 {
+	QPainter painter(this);
+	
 	if (m_bIsChecked)
 	{
 		updateConfig();
-		QPainter painter(this);
 		m_pHistogramPainter->draw(&painter, m_oCfg);
+	}
+	else
+	{
+		painter.setPen(QPen(Qt::darkGray, Qt::SolidLine));
+		painter.setFont(QFont("Arial", width() / 20, QFont::Normal));
+		painter.fillRect(0, 0, width(), height(), Qt::gray);
+		painter.drawText(0, 0, width(), height() / 6, Qt::AlignCenter, "Histogram Review");
 	}
 }
 

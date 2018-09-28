@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ColSelectorWidget.cpp" />
+    <ClCompile Include="flowLayout.cpp" />
     <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="HistogramReviewPaneWidget.cpp" />
     <ClCompile Include="HistogramPainter.cpp" />
@@ -139,6 +140,7 @@
     <QtMoc Include="ColSelectorWidget.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="flowLayout.h" />
     <ClInclude Include="Histogram.h" />
     <QtMoc Include="HistogramReviewPaneWidget.h" />
     <ClInclude Include="HistogramPainter.h" />
