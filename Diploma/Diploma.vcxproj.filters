@@ -57,6 +57,12 @@
     <ClCompile Include="flowLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HistogramController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistogramModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWIndow.h">
@@ -91,6 +97,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="flowLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HistogramModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

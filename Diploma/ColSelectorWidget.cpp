@@ -1,13 +1,13 @@
 #include "ColSelectorWidget.h"
 #include <QColor>
 #include <QSize>
-
+#include <QSortFilterProxyModel>
 
 /* Model Implementation */
 ColSelectorModel::ColSelectorModel(QObject *parent)
 	: QStringListModel(parent)
 {
-	m_lstColnames << "Bin" << "Data" << "Parameter" << "DieX" << "DieY";
+	m_lstColnames << "Bin" << "Data" << "Parameter" << "DieX" << "DieY" << "Azzzz";
 	setStringList(m_lstColnames);
 }
 
@@ -79,8 +79,15 @@ bool ColSelectorModel::setData(const QModelIndex &index, const QVariant &value, 
 ColSelectorWidget::ColSelectorWidget(QWidget *parent)
 	: QListView(parent)
 {
-	m_pColSelectorModel = new ColSelectorModel();
-	setModel(m_pColSelectorModel);
+	m_pColSelectorModel = new ColSelectorModel(this);
+
+	proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel(m_pColSelectorModel);
+
+	proxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+	proxyModel->setFilterKeyColumn(0);
+
+	setModel(proxyModel);
 
 	// prevent edit
 	setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -88,4 +95,9 @@ ColSelectorWidget::ColSelectorWidget(QWidget *parent)
 
 ColSelectorWidget::~ColSelectorWidget()
 {
+}
+
+void ColSelectorWidget::onFilterChanged(QString& text)
+{
+	proxyModel->setFilterFixedString(text);
 }

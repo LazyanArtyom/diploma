@@ -6,6 +6,7 @@
 #include <QStringList>
 #include <QPersistentModelIndex>
 #include <QSet>
+#include <QSortFilterProxyModel>
 
 class ColSelectorModel : public QStringListModel
 {
@@ -37,6 +38,10 @@ public:
 
 private:
 	ColSelectorModel *m_pColSelectorModel;
+	QSortFilterProxyModel *proxyModel;
+
+public slots:
+	void onFilterChanged(QString& text);
 };
 
 #endif // ColSelectorWidget_H

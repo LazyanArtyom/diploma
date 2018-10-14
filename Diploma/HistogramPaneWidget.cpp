@@ -23,21 +23,6 @@ CHistogramPaneWidget::~CHistogramPaneWidget()
 {
 }
 
-void CHistogramPaneWidget::init()
-{
-	updateGeometry();
-
-	for (int i = 0; i < 10; i++)
-	{
-		QVector<int> vect;
-		for (int j = 0; j < 10; j++)
-			vect.push_back((qrand() % 99));
-
-		CHistogram *pHistogram = new CHistogram(vect, this);
-		m_pLayout->addWidget(pHistogram);
-	}
-}
-
 void CHistogramPaneWidget::setPainter(CHistogramPainter *pPainter)
 {
 	m_pHistogramPainter = pPainter;
@@ -46,6 +31,14 @@ void CHistogramPaneWidget::setPainter(CHistogramPainter *pPainter)
 CHistogramPainter* CHistogramPaneWidget::getPainter() const
 {
 	return m_pHistogramPainter;
+}
+
+void CHistogramPaneWidget::addHistogram(t_sHistogramData const &oHistogramData)
+{
+	updateGeometry();
+
+	CHistogram *pHistogram = new CHistogram(oHistogramData, m_pHistogramPainter, this);
+	m_pLayout->addWidget(pHistogram);
 }
 
 void CHistogramPaneWidget::updateGeometry()
