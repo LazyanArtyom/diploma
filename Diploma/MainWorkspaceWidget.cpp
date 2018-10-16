@@ -22,7 +22,11 @@ void MainWorkspaceWidget::setupUi()
 	QListView *listview = new QListView;
 
 	m_pHistogramReviewPaneWidget = new CHistogramReviewPaneWidget();
+	
 	m_pColSelectorWidget = new ColSelectorWidget();
+	QStringList cols { "Bin", "Details", "DieX", "DieY" };
+	m_pColSelectorWidget->AddColumns(cols);
+
 	m_pHistogramPaneWidget = new CHistogramPaneWidget();
 	m_pHistogramPainter = new CHistogramPainter();
 

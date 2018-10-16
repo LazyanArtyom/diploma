@@ -2,13 +2,11 @@
 #include <QColor>
 #include <QSize>
 
-
 /* Model Implementation */
 ColSelectorModel::ColSelectorModel(QObject *parent)
 	: QStringListModel(parent)
 {
-	m_lstColnames << "Bin" << "Data" << "Parameter" << "DieX" << "DieY";
-	setStringList(m_lstColnames);
+	//setStringList(m_lstColnames);
 }
 
 ColSelectorModel::~ColSelectorModel()
@@ -20,12 +18,12 @@ void ColSelectorModel::addCols(const QStringList lstColNames)
 	m_lstColnames = lstColNames;
 }
 
-int ColSelectorModel::rowCount(const QModelIndex & parent) const
+int ColSelectorModel::rowCount(const QModelIndex &parent) const
 {
 	return m_lstColnames.count();
 }
 
-QVariant ColSelectorModel::data(const QModelIndex & index, int role) const
+QVariant ColSelectorModel::data(const QModelIndex &index, int role) const
 {
 	if (!index.isValid())
 		return QVariant();
@@ -88,4 +86,9 @@ ColSelectorWidget::ColSelectorWidget(QWidget *parent)
 
 ColSelectorWidget::~ColSelectorWidget()
 {
+}
+
+void ColSelectorWidget::AddColumns(QStringList lstColumns)
+{
+	m_pColSelectorModel->addCols(lstColumns);
 }

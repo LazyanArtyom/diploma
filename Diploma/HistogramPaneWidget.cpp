@@ -27,15 +27,19 @@ void CHistogramPaneWidget::init()
 {
 	updateGeometry();
 
-	for (int i = 0; i < 10; i++)
-	{
-		QVector<int> vect;
-		for (int j = 0; j < 10; j++)
-			vect.push_back((qrand() % 99));
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	QVector<int> vect;
+	//	for (int j = 0; j < 10; j++)
+	//		vect.push_back((qrand() % 99));
 
-		CHistogram *pHistogram = new CHistogram(vect, this);
-		m_pLayout->addWidget(pHistogram);
-	}
+	//	CHistogram *pHistogram = new CHistogram(vect, this);
+	//	m_pLayout->addWidget(pHistogram);
+	//}
+
+	QVector<int> vect = {1, 3, 1, 1, 1, 5, 8, 10, 0, 5, 5};
+	CHistogram *pHistogram = new CHistogram(vect, this);
+	m_pLayout->addWidget(pHistogram);
 }
 
 void CHistogramPaneWidget::setPainter(CHistogramPainter *pPainter)
@@ -57,7 +61,7 @@ void CHistogramPaneWidget::updateGeometry()
 	for (int i = 0; i < 10; i++)
 	{
 		if (i < 10 / 2)
-			m_pLayout->setRowMinimumHeight(i, nWidth);
+			m_pLayout->setRowMinimumHeight(i, 500);
 	}
 }
 

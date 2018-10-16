@@ -21,6 +21,7 @@ typedef struct SHistogramConfig
 	int nMaxValue;
 	int nYCordinatesOffset;
 	QMap<int, int> mapFrequency;
+	QVector<int> vectHistoData;
 
 	inline SHistogramConfig()
 		:nWidth(400),
@@ -35,7 +36,8 @@ typedef struct SHistogramConfig
 		nMinValue(0),
 		nMaxValue(10),
 		nYCordinatesOffset(2),
-		mapFrequency(QMap<int, int>())
+		mapFrequency(QMap<int, int>()),
+		vectHistoData(QVector<int>())
 	{}
 
 } t_sHistogramConfig;

@@ -68,6 +68,8 @@ void CHistogramPainter::drawAxes(QPainter *pPainter)
 
 	int nXOffset = qCeil(m_oCfg.nWidth / m_oCfg.nBinsCount);
 	int nXCordinatesOffset = m_oCfg.nBinsWidth;
+	int nIndex = 0;
+	int nBinsCount = m_oCfg.vectHistoData.count();
 
 	for (int nX = 0, nXCordinate = m_oCfg.nMinValue; nX <= m_oCfg.nWidth; nX += nXOffset, nXCordinate += nXCordinatesOffset)
 	{
@@ -76,9 +78,11 @@ void CHistogramPainter::drawAxes(QPainter *pPainter)
 
 		if ((nX + nXOffset) <= m_oCfg.nWidth)
 		{
-			CBin *pBin = new CBin(nX, nXOffset - 1);
-			pBin->setRange(nXCordinate, (nXCordinate + nXCordinatesOffset) - 1);
-			m_lstBins << pBin;
+			drawBin(pPainter, nX, nXOffset - 2, nIndex);
+			nIndex++;
+		//	CBin *pBin = new CBin(nX, nXOffset - 1);
+		//	pBin->setRange(nXCordinate, (nXCordinate + nXCordinatesOffset) - 1);
+			//m_lstBins << pBin;
 		}
 
 		// draw X cordinates
@@ -118,8 +122,26 @@ void CHistogramPainter::drawBins(QPainter *pPainter)
 		int height = -((nHeight * qCeil(m_oCfg.nHeight / 9)) / m_oCfg.nYCordinatesOffset);
 
 		pPainter->drawRect(nWidth.first, 0, nWidth.second, height);
-
 	}
+
+	for (int i = 0; i < m_oCfg.vectHistoData.count(); i++)
+	{
+		int nBinHeight = -((m_oCfg.vectHistoData[i] * qCeil(m_oCfg.nHeight / 9)) / m_oCfg.nYCordinatesOffset);
+	}
+
+	pPainter->restore();
+}
+
+void CHistogramPainter::drawBin(QPainter *pPainter, int nX1, int nX2, int nIndex)
+{
+	pPainter->save();
+
+	pPainter->setPen(QPen(Qt::black, 1, Qt::SolidLine));
+	pPainter->setOpacity(0.6);
+	pPainter->setBrush(Qt::blue);
+
+	int nBinHeight = -((m_oCfg.vectHistoData[nIndex] * qCeil(m_oCfg.nHeight / 9)) / m_oCfg.nYCordinatesOffset);
+	pPainter->drawRect(nX1, 0, nX2, nBinHeight);
 
 	pPainter->restore();
 }
@@ -132,7 +154,7 @@ void CHistogramPainter::drawHeader(QPainter *pPainter)
 
 	QRect rect(0, 0, m_oCfg.nWidth + m_oCfg.nLeftMargin, nHeaderHeight);
 
-	QFont font("Arial", nHeaderHeight / 2, QFont::Normal);
+	QFont font("Arial", nHeaderHeight / 3, QFont::Normal);
 	pPainter->setPen(QPen(Qt::darkGray, 1, Qt::SolidLine));
 	pPainter->drawLine(0, nHeaderHeight, m_oCfg.nWidth + m_oCfg.nLeftMargin, nHeaderHeight);
 	pPainter->setFont(font);
@@ -156,7 +178,7 @@ void CHistogramPainter::drawFooter(QPainter *pPainter)
 
 	QRect rect(0, 0, m_oCfg.nWidth + m_oCfg.nLeftMargin, -nFooterHeight);
 
-	QFont font("Arial", nFooterHeight / 2, QFont::Normal);
+	QFont font("Arial", nFooterHeight / 3, QFont::Normal);
 	pPainter->setPen(QPen(Qt::darkGray, 3, Qt::SolidLine));
 	pPainter->setFont(font);
 	pPainter->setPen(QPen(Qt::darkGray, 3, Qt::SolidLine));

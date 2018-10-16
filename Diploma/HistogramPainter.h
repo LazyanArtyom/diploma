@@ -18,6 +18,7 @@ public:
 	void drawPlot(QPainter *pPainter);
 	void drawAxes(QPainter *pPainter);
 	void drawBins(QPainter *pPainter);
+	void drawBin(QPainter *pPainter, int nX1, int nX2, int nIndex);
 	void drawHeader(QPainter *pPainter);
 	void drawFooter(QPainter *pPainter);
 

@@ -26,7 +26,7 @@ void CHistogram::updateConfig()
 
 	m_oCfg.nLeftMargin = fMetrics.width(QString::number(m_oCfg.nMaxFrequencyCount)) + 25;
 	m_oCfg.nRightMargin = fMetrics.width(QString::number(m_oCfg.nMaxValue)) / 2 + 10;
-	m_oCfg.nTopMargin = fMetrics.height();
+	m_oCfg.nTopMargin = fMetrics.height() + 5;
 	m_oCfg.nBottomMargin = fMetrics.height() * 2;
 
 	m_oCfg.nWidth -= m_oCfg.nLeftMargin;
@@ -54,6 +54,7 @@ void CHistogram::paintEvent(QPaintEvent *pEvent)
 
 void CHistogram::run()
 {
+
 	if (m_vectData.isEmpty())
 		return;
 
@@ -77,15 +78,26 @@ void CHistogram::run()
 
 	if (m_oCfg.nBinsCount > 20)
 		m_oCfg.nBinsCount = 20;
-
 	else if (m_oCfg.nBinsCount < 5)
 		m_oCfg.nBinsCount = 5;
 
 	m_oCfg.nMinValue = m_oCfg.mapFrequency.firstKey();
 	m_oCfg.nMaxValue = m_oCfg.mapFrequency.lastKey();
-
 	m_oCfg.nBinsWidth = qCeil((m_oCfg.nMaxValue - m_oCfg.nMinValue) / (double)m_oCfg.nBinsCount);
 
+
+	m_oCfg.vectHistoData.fill(0, m_oCfg.nBinsCount);
+
+	for (int i = 0; i < m_vectData.count(); i++)
+	{
+		int index = (m_vectData[i] - m_oCfg.nMinValue) / m_oCfg.nBinsWidth;
+
+		if (index > i)
+			index = i;
+		
+		m_oCfg.vectHistoData[index]++;
+	}
+	
 	m_oCfg.nYCordinatesOffset = qCeil(m_oCfg.nMaxFrequencyCount / 9.0);
 
 	m_bIsCalculated = true;

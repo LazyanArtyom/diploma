@@ -5,6 +5,7 @@
 #include <QStringListModel>
 #include <QStringList>
 #include <QPersistentModelIndex>
+#include <QStyledItemDelegate>
 #include <QSet>
 
 class ColSelectorModel : public QStringListModel
@@ -17,7 +18,7 @@ public:
 	void addCols(const QStringList lstColNames);
 
 protected:
-	// Inherited via QAbstractListModel
+	// Inherited via QAbstractListModel.o
 	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 	virtual Qt::ItemFlags flags(const QModelIndex &index) const override;
@@ -34,6 +35,11 @@ class ColSelectorWidget : public QListView
 public:
 	ColSelectorWidget(QWidget *parent = 0);
 	~ColSelectorWidget();
+
+	void AddColumns(QStringList lstColumns);
+
+signals:
+	void onColumnsAdded(QStringList lstColumns);
 
 private:
 	ColSelectorModel *m_pColSelectorModel;
