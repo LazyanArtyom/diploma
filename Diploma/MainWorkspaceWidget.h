@@ -1,14 +1,12 @@
 #ifndef MainWorkspaceWidget_H
 #define MainWorkspaceWidget_H
 
-#include <QWidget>
-#include <QSplitter>
-
 #include "SpreadSheetPaneWidget.h"
 #include "ColSelectorWidget.h"
-#include "HistogramPaneWidget.h"
-#include "HistogramReviewPaneWidget.h"
-#include "HistogramPainter.h"
+#include "HistogramController.h"
+
+#include <QWidget>
+#include <QSplitter>
 
 class MainWorkspaceWidget : public QSplitter
 {
@@ -19,12 +17,8 @@ public:
 private:
 	void setupUi();
 
-	//SpreadSheetPaneWidget *m_pSpreadsheetPaneWidget;
-	CHistogramPaneWidget *m_pHistogramPaneWidget;
-	CHistogramReviewPaneWidget *m_pHistogramReviewPaneWidget;
+	CHistogramController *m_pHistogramContorller;
 	ColSelectorWidget *m_pColSelectorWidget;
-
-	CHistogramPainter *m_pHistogramPainter;
 };
 
 #endif // MainWorkspaceWidget_H

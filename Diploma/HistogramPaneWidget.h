@@ -5,6 +5,7 @@
 #include <QGridLayout>
 #include "flowLayout.h"
 #include "Histogram.h"
+#include "HistogramModel.h"
 
 class CHistogramPainter;
 
@@ -15,10 +16,10 @@ public:
 	CHistogramPaneWidget(QWidget *pParent = 0);
 	~CHistogramPaneWidget();
 
-	void init();
-
 	void setPainter(CHistogramPainter *pPainter);
 	CHistogramPainter* getPainter() const;
+
+	void addHistogram(t_sHistogramData const &oHistogramData);
 
 	void updateGeometry();
 

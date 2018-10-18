@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QPaintEvent>
 
+#include "HistogramModel.h"
+
 class CHistogramPainter;
 
 typedef struct SHistogramConfig
@@ -45,7 +47,7 @@ typedef struct SHistogramConfig
 class CHistogram final : public QWidget
 {
 public:
-	CHistogram(QVector<int> vectData, QWidget *pParent = 0);
+	CHistogram(t_sHistogramData const &oHistogramData, CHistogramPainter *pHistogramPainter, QWidget *pParent = 0);
 	~CHistogram();
 
 	void updateConfig();
@@ -63,8 +65,8 @@ private:
 	void run();
 
 private:
-	QVector<int> m_vectData;
-
+	t_sHistogramData m_oHistogramData;
+	QVector<int> m_aData;
 };
 #endif // Histogram_H
 

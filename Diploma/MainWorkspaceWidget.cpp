@@ -1,12 +1,12 @@
 #include "MainWorkspaceWidget.h"
-#include "Histogram.h"
+#include "HistogramPaneWidget.h"
+#include "HistogramReviewPaneWidget.h"
+
 #include <QScrollArea>
 
 MainWorkspaceWidget::MainWorkspaceWidget(QWidget *parent)
 	: m_pColSelectorWidget(nullptr),
-	  m_pHistogramReviewPaneWidget(nullptr),
-	  m_pHistogramPainter(nullptr), 
-	  m_pHistogramPaneWidget(nullptr), 
+	  m_pHistogramContorller(nullptr),
 	  QSplitter(parent)
 {
 	setupUi();
@@ -14,38 +14,29 @@ MainWorkspaceWidget::MainWorkspaceWidget(QWidget *parent)
 
 MainWorkspaceWidget::~MainWorkspaceWidget()
 {
-	delete m_pHistogramPainter;
+	if (m_pHistogramContorller != nullptr)
+		delete m_pHistogramContorller;
 }
 
 void MainWorkspaceWidget::setupUi()
 {
-	QListView *listview = new QListView;
-
-	m_pHistogramReviewPaneWidget = new CHistogramReviewPaneWidget();
-	
 	m_pColSelectorWidget = new ColSelectorWidget();
-	QStringList cols { "Bin", "Details", "DieX", "DieY" };
-	m_pColSelectorWidget->AddColumns(cols);
+	m_pHistogramContorller = new CHistogramController();
+	m_pHistogramContorller->init(QVector<int>{5, 5, 5, 5, 10, 10, 10});
 
-	m_pHistogramPaneWidget = new CHistogramPaneWidget();
-	m_pHistogramPainter = new CHistogramPainter();
-
-	m_pHistogramReviewPaneWidget->setPainter(m_pHistogramPainter);
-	m_pHistogramPaneWidget->setPainter(m_pHistogramPainter);
-
-	m_pHistogramPaneWidget->init();
+	CHistogramPaneWidget *pHistogramPaneWidget = m_pHistogramContorller->getHistogramPane();
+	CHistogramReviewPaneWidget *pHistogramReviewPaneWidget = m_pHistogramContorller->getHistogramReviewPane();
+	QObject::connect(pHistogramPaneWidget, SIGNAL(sigHistogramChecked(t_sHistogramConfig&)), pHistogramReviewPaneWidget, SLOT(onHistogramChecked(t_sHistogramConfig&)));
 
 	QScrollArea *pScrollArea = new QScrollArea();
 	pScrollArea->setWidgetResizable(true);
-	pScrollArea->setWidget(m_pHistogramPaneWidget);
+	pScrollArea->setWidget(pHistogramPaneWidget);
 
 	addWidget(m_pColSelectorWidget);
 	addWidget(pScrollArea);
-	addWidget(m_pHistogramReviewPaneWidget);
+	addWidget(pHistogramReviewPaneWidget);
 
 	setStretchFactor(0, 1);
 	setStretchFactor(1, 4);
 	setStretchFactor(2, 3);
-
-	QObject::connect(m_pHistogramPaneWidget, SIGNAL(sigHistogramChecked(t_sHistogramConfig&)), m_pHistogramReviewPaneWidget, SLOT(onHistogramChecked(t_sHistogramConfig&)));
 }

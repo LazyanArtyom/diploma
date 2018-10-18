@@ -4,6 +4,7 @@
 #include <QList>
 #include <QPainter>
 #include "Histogram.h"
+#include "HistogramModel.h"
 
 class CBin;
 class CRange;
@@ -14,7 +15,7 @@ public:
 	CHistogramPainter();
 	~CHistogramPainter();
 
-	void draw(QPainter *pPainter, t_sHistogramConfig &oCfg);
+	void draw(QPainter *pPainter, t_sHistogramData &oHistogramData, QRect rect);
 	void drawPlot(QPainter *pPainter);
 	void drawAxes(QPainter *pPainter);
 	void drawBins(QPainter *pPainter);
@@ -27,10 +28,22 @@ public:
 	void clear();
 
 private:
+	t_sHistogramData m_oHistogramData;
 	t_sHistogramConfig m_oCfg;
 	QList<CBin*> m_lstBins;
+	//QVector<int> m_aHistoData;
 
 	QString m_sTitle;
+
+	int m_nLeftMargin;
+	int m_nRightMargin;
+	int m_nTopMargin;
+	int m_nBottomMargin;
+
+	int m_nHeaderHeight;
+	int m_nFooterHeight;
+
+	QRect m_oRect;
 };
 
 class CRange

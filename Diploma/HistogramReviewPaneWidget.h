@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "HistogramPainter.h"
+#include "HistogramModel.h"
 
 class CHistogram;
 
@@ -15,7 +16,7 @@ public:
 
 	void updateConfig();
 
-	void setConfig(const t_sHistogramConfig &oCfg);
+	void setHistogramData(const t_sHistogramData &oHistogramData);
 	void setPainter(CHistogramPainter *pHistogramPainter);
 
 protected:
@@ -23,6 +24,7 @@ protected:
 
 private:
 	t_sHistogramConfig m_oCfg;
+	t_sHistogramData m_oHistogramData;
 	CHistogramPainter *m_pHistogramPainter;
 	bool m_bIsChecked;
 

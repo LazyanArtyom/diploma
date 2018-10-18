@@ -14,9 +14,10 @@ CHistogramReviewPaneWidget::CHistogramReviewPaneWidget(QWidget *pParent)
 
 CHistogramReviewPaneWidget::~CHistogramReviewPaneWidget() {}
 
-void CHistogramReviewPaneWidget::setConfig(const t_sHistogramConfig &oCfg)
+void CHistogramReviewPaneWidget::setHistogramData(const t_sHistogramData &oHistogramData)
 {
-	m_oCfg = oCfg;
+//	m_oCfg = oCfg;
+	m_oHistogramData = oHistogramData;
 }
 
 void CHistogramReviewPaneWidget::setPainter(CHistogramPainter *pHistogramPainter)
@@ -40,7 +41,7 @@ void CHistogramReviewPaneWidget::paintEvent(QPaintEvent *pEvent)
 	if (m_bIsChecked)
 	{
 		updateConfig();
-		m_pHistogramPainter->draw(&painter, m_oCfg);
+		m_pHistogramPainter->draw(&painter, m_oHistogramData, rect());
 	}
 	else
 	{
@@ -53,7 +54,7 @@ void CHistogramReviewPaneWidget::paintEvent(QPaintEvent *pEvent)
 
 void CHistogramReviewPaneWidget::onHistogramChecked(t_sHistogramConfig &oCfg)
 {
-	setConfig(oCfg);
+//	setConfig(oCfg);
 	m_bIsChecked = true;
 	update();
 }
