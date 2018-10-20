@@ -1,7 +1,8 @@
 #include "HistogramModel.h"
 #include <QtMath>
+#include <QThread>
 
-CHistogramModel::CHistogramModel()
+CHistogramModel::CHistogramModel() : m_aData(QVector<int>()), m_nDataCount(0)
 {
 }
 
@@ -12,6 +13,7 @@ CHistogramModel::~CHistogramModel()
 void CHistogramModel::setData(QVector<int> aData)
 {
 	m_aData = aData;
+	m_nDataCount = m_aData.count();
 }
 
 t_sHistogramData CHistogramModel::run()
@@ -21,11 +23,9 @@ t_sHistogramData CHistogramModel::run()
 	if (m_aData.isEmpty())
 		return oHistogramData;
 
-	int nDataCount = m_aData.count();
-
 	// Sturge’s Rule 
 	// https://www.statisticshowto.datasciencecentral.com/choose-bin-sizes-statistics/
-	oHistogramData.nBinsCount = qFloor(1 + 3.22 * log(m_aData.count()));
+	oHistogramData.nBinsCount = qFloor(1 + 3.22 * log(m_nDataCount));
 
 	if (oHistogramData.nBinsCount > 20)
 		oHistogramData.nBinsCount = 20;
@@ -34,7 +34,8 @@ t_sHistogramData CHistogramModel::run()
 
 	oHistogramData.nMaxValue = m_aData[0];
 	oHistogramData.nMinValue = m_aData[0];
-	for (int i = 1; i < nDataCount; i++)
+
+	for (int i = 1; i < m_nDataCount; i++)
 	{
 		if (m_aData[i] < oHistogramData.nMinValue)
 			oHistogramData.nMinValue = m_aData[i];
@@ -43,15 +44,38 @@ t_sHistogramData CHistogramModel::run()
 	}
 
 	oHistogramData.nBinsRange = qCeil((oHistogramData.nMaxValue - oHistogramData.nMinValue) / (double)oHistogramData.nBinsCount);
-
-	oHistogramData.aFrequencyTable.resize(oHistogramData.nBinsCount);
-	for (int i = 0; i < m_aData.count(); i++)
-	{
-		int nIndex = (m_aData[i] - oHistogramData.nMinValue) / oHistogramData.nBinsRange;
-		if (nIndex > (oHistogramData.nBinsCount - 1))
-			nIndex = (oHistogramData.nBinsCount - 1);
-		oHistogramData.aFrequencyTable[nIndex]++;
-	}
+	
+	oHistogramData.aFrequencyTable = calculateFrequencyTableSingleThread(m_nDataCount, oHistogramData.nMinValue, oHistogramData.nBinsCount, oHistogramData.nBinsRange);
 
 	return oHistogramData;
+}
+
+QVector<int> CHistogramModel::calculateFrequencyTableSingleThread(int nDataCount, int nMinValue, int nBinsCount, int nBinsRange)
+{
+	QVector<int> aFrequencyTable;
+	aFrequencyTable.resize(nBinsCount);
+
+
+	for (int i = 0; i < nDataCount; i++)
+	{
+		int nIndex = (m_aData[i] - nMinValue) / nBinsRange;
+		if (nIndex > (nBinsCount - 1))
+			nIndex = (nBinsCount - 1);
+		aFrequencyTable[nIndex]++;
+	}
+	return aFrequencyTable;
+}
+
+QVector<int> CHistogramModel::calculateFrequencyTableMultiThread(int nDataCount, int nMinValue, int nBinsCount, int nBinsRange)
+{
+	int nThreadCount = QThread::idealThreadCount();
+
+	int nBegin = 0;
+	int nEnd = 0;
+	int nOffset = m_nDataCount / nThreadCount;
+
+	for (int i = 0; i < nThreadCount; i++)
+	{
+
+	}
 }

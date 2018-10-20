@@ -29,9 +29,12 @@ public:
 
 	void setData(QVector<int> aData);
 	t_sHistogramData run();
+	QVector<int> calculateFrequencyTableSingleThread(int nDataCount, int nMinValue, int nBinsCount, int nBinsRange);
+	QVector<int> calculateFrequencyTableMultiThread(int nDataCount, int nMinValue, int nBinsCount, int nBinsRange);
 
 private:
 	QVector<int> m_aData;
+	int m_nDataCount;
 };
 
 #endif // HistogramModel_H

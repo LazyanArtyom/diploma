@@ -36,7 +36,7 @@ CHistogramPainter* CHistogramPaneWidget::getPainter() const
 void CHistogramPaneWidget::addHistogram(t_sHistogramData const &oHistogramData)
 {
 	updateGeometry();
-
+	m_oHistogramData = oHistogramData;
 	CHistogram *pHistogram = new CHistogram(oHistogramData, m_pHistogramPainter, this);
 	m_pLayout->addWidget(pHistogram);
 }
@@ -63,7 +63,7 @@ bool CHistogramPaneWidget::eventFilter(QObject *pObj, QEvent *pEvent)
 		QMouseEvent *pMouseEvent = static_cast<QMouseEvent*>(pEvent);
 		
 		if (pMouseEvent->buttons() == Qt::LeftButton)
-			emit sigHistogramChecked(pHistogram->getConfig());
+			emit sigHistogramChecked(m_oHistogramData);
 
 	}
 	else if (pEvent->type() == QEvent::Enter)

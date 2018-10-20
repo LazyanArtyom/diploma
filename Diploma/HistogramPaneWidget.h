@@ -30,8 +30,10 @@ private:
 	CHistogramPainter *m_pHistogramPainter;
 	QGridLayout *m_pLayout;
 
+	t_sHistogramData m_oHistogramData;
+
 signals:
-	void sigHistogramChecked(t_sHistogramConfig &oCfg);
+	void sigHistogramChecked(t_sHistogramData &oHistogramData);
 };
 
 #endif // HistogramPaneWidget_H

@@ -47,7 +47,7 @@ private:
 	QSortFilterProxyModel *proxyModel;
 
 public slots:
-	void onFilterChanged(QString& text);
+	//void onFilterChanged(QString& text);
 };
 
 #endif // ColSelectorWidget_H

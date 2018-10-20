@@ -14,8 +14,6 @@ public:
 	CHistogramReviewPaneWidget(QWidget *pParent = 0);
 	~CHistogramReviewPaneWidget();
 
-	void updateConfig();
-
 	void setHistogramData(const t_sHistogramData &oHistogramData);
 	void setPainter(CHistogramPainter *pHistogramPainter);
 
@@ -29,7 +27,7 @@ private:
 	bool m_bIsChecked;
 
 public slots:
-	void onHistogramChecked(t_sHistogramConfig &oCfg);
+	void onHistogramChecked(t_sHistogramData &oHistogramData);
 };
 
 #endif // HistogramReviewPaneWidget_H

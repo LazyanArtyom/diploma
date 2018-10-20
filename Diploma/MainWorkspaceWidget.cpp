@@ -26,7 +26,7 @@ void MainWorkspaceWidget::setupUi()
 
 	CHistogramPaneWidget *pHistogramPaneWidget = m_pHistogramContorller->getHistogramPane();
 	CHistogramReviewPaneWidget *pHistogramReviewPaneWidget = m_pHistogramContorller->getHistogramReviewPane();
-	QObject::connect(pHistogramPaneWidget, SIGNAL(sigHistogramChecked(t_sHistogramConfig&)), pHistogramReviewPaneWidget, SLOT(onHistogramChecked(t_sHistogramConfig&)));
+	QObject::connect(pHistogramPaneWidget, SIGNAL(sigHistogramChecked(t_sHistogramData&)), pHistogramReviewPaneWidget, SLOT(onHistogramChecked(t_sHistogramData&)));
 
 	QScrollArea *pScrollArea = new QScrollArea();
 	pScrollArea->setWidgetResizable(true);
