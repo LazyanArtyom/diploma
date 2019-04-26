@@ -1,21 +1,45 @@
 #ifndef MainWindow_H
 #define MainWindow_H
 
-#include <QMainWindow>
 #include <QMenuBar>
-#include "MainWorkspaceWidget.h"
+#include <QComboBox>
+#include <QMainWindow>
 
-class MainWIndow : public QMainWindow
+// Local includes
+#include "Timer.h"
+#include "ChartController.h"
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	CMainWindow
+//
+class CMainWindow : public QMainWindow
 {
 	Q_OBJECT
 public:
-	MainWIndow(QWidget *parent = 0);
-	~MainWIndow();
+	CMainWindow(QWidget *parent = 0);
+	~CMainWindow();
+
+	int  getBinCount() const;
+	void setBinCount(int nBinCount);
+
+protected:
+	void setupUi();
+
+private slots:
+	void onRun();
+	void onBinCountChanged(const QString& sText);
+
 private:
-	MainWorkspaceWidget *m_pMainWorkspace;
-	QToolBar *m_pToolBar;
-	QAction *m_pOpenAct;
-	QAction *m_pRunAct;
+	int  m_nBinCount = 0;
+
+	CTimer*    m_pTimer       = nullptr;
+	QAction*   m_pRunAct      = nullptr;
+	QAction*   m_pOpenAct     = nullptr;
+	QToolBar*  m_pToolBar     = nullptr;
+	QComboBox* m_pcboBinCount = nullptr;
+	CChartController* m_pChartContorller = nullptr;
 };
+////////////////////////////////////////////////////////////////////////////////
 
 #endif // MainWindow_H

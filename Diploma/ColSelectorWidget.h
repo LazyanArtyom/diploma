@@ -1,13 +1,13 @@
 #ifndef ColSelectorWidget_H
 #define ColSelectorWidget_H
 
-#include <QListView>
-#include <QStringListModel>
-#include <QStringList>
-#include <QPersistentModelIndex>
-#include <QStyledItemDelegate>
 #include <QSet>
+#include <QListView>
+#include <QStringList>
+#include <QStringListModel>
+#include <QStyledItemDelegate>
 #include <QSortFilterProxyModel>
+#include <QPersistentModelIndex>
 
 class ColSelectorModel : public QStringListModel
 {

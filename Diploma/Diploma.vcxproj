@@ -58,6 +58,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -113,42 +114,34 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HistogramController.cpp" />
-    <ClCompile Include="ColSelectorWidget.cpp" />
-    <ClCompile Include="flowLayout.cpp" />
-    <ClCompile Include="Histogram.cpp" />
-    <ClCompile Include="HistogramModel.cpp" />
-    <ClCompile Include="HistogramReviewPaneWidget.cpp" />
-    <ClCompile Include="HistogramPainter.cpp" />
-    <ClCompile Include="HistogramPaneWidget.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="ChartController.cpp" />
+    <ClCompile Include="Chart.cpp" />
+    <ClCompile Include="ChartModel.cpp" />
+    <ClCompile Include="ChartReviewPane.cpp" />
+    <ClCompile Include="ChartPainter.cpp" />
+    <ClCompile Include="ChartView.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWIndow.cpp" />
-    <ClCompile Include="MainWorkspaceWidget.cpp" />
-    <ClCompile Include="SpreadSheetPaneWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="MainWIndow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="MainWorkspaceWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="Resource.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="SpreadSheetPaneWidget.h" />
+    <QtMoc Include="Timer.h" />
+    <ClInclude Include="Definitions.h" />
+    <ClInclude Include="ChartController.h" />
+    <ClInclude Include="Chart.h" />
+    <QtMoc Include="ChartReviewPane.h" />
+    <ClInclude Include="ChartModel.h" />
+    <ClInclude Include="ChartPainter.h" />
+    <QtMoc Include="ChartView.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ColSelectorWidget.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HistogramController.h" />
-    <ClInclude Include="flowLayout.h" />
-    <ClInclude Include="Histogram.h" />
-    <QtMoc Include="HistogramReviewPaneWidget.h" />
-    <ClInclude Include="HistogramModel.h" />
-    <ClInclude Include="HistogramPainter.h" />
-    <QtMoc Include="HistogramPaneWidget.h" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

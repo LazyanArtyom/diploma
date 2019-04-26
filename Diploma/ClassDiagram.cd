@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IChartController">
+    <Position X="3.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAABAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChartController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CChartController">
+    <Position X="3.5" Y="5.75" Width="2.25" />
+    <InheritanceLine Type="IChartController" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.625" Y="4.988" />
+        <Point X="4.625" Y="5.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgACAAAAAAAAgAAAAAEAABAAAECAAAAAAIAAAAA=</HashCode>
+      <FileName>ChartController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IChart">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Chart.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHistogram">
+    <Position X="9.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAABAABABAAAAAAAAAAAQAAACAAAAAAAA=</HashCode>
+      <FileName>Chart.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IChartModel">
+    <Position X="1" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChartModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHistogramModel">
+    <Position X="0.5" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAggAAAAAABAAAgACIAAAAABAAEgCAAAAAAABAAA=</HashCode>
+      <FileName>ChartModel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IPainter" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChartPainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHistogramPainter" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAARIgACBEAAgAIAAQAAAAAAAAAAAACAQEBQAFA=</HashCode>
+      <FileName>ChartPainter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMainWindow">
+    <Position X="15.5" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAIAAAAAAAhAISAAAEAAQAAAgAAAABAAAAAAA=</HashCode>
+      <FileName>MainWIndow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CTimer" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAgBAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChartReviewPane">
+    <Position X="12.5" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAABIAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ChartReviewPane.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IChartView">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChartView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CChartViewPane">
+    <Position X="6.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAEAAIAQAwAEAAAAAgAASAAAAAAQAAAAAAAIAAAA=</HashCode>
+      <FileName>ChartView.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QWidget" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hA6pAGgYqICSoYVAaL8yqpBimu1GwLWO4PBqCgXdwII=</HashCode>
+      <FileName>C:\Programs\Qt\5.11.1\include\QtWidgets\qwidget.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QMainWindow" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoACQgKYCAUhRAgBkKBY4oAAABEAABmBggAgIAMgACA=</HashCode>
+      <FileName>C:\Qt\Qt5.6.3\5.6.3\msvc2015_64\include\QtWidgets\qmainwindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="IChartData" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Definitions.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CHistogramData" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAACAAAAAAAAQIAAAAAAA=</HashCode>
+      <FileName>Definitions.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="EChartType" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Definitions.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

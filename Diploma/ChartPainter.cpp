@@ -1,24 +1,31 @@
-#include "HistogramPainter.h"
 #include <QtMath>
 
-CHistogramPainter::CHistogramPainter() : m_sTitle(""), m_nHeaderHeight(0), m_nFooterHeight(0)
+// Local includes
+#include "ChartPainter.h"
+
+////////////////////////////////////////////////////////////////////////////////
+//
+//	CHistogramPainter
+//
+CHistogramPainter::CHistogramPainter() 
+	: m_nHeaderHeight(0), m_nFooterHeight(0)
 {
 }
 
-
-CHistogramPainter::~CHistogramPainter()
+void CHistogramPainter::draw(QPainter *pPainter, IChartData* pChartData, QRect rect)
 {
-}
+	CHistogramData* pHistogramData = dynamic_cast<CHistogramData*>(pChartData);
+	if (pHistogramData == nullptr)
+		return;
 
-void CHistogramPainter::draw(QPainter *pPainter, t_sHistogramData &oHistogramData, QRect rect)
-{
-	m_oHistogramData = oHistogramData;
+	m_oHistogramData = pHistogramData;
 
 	QFont font("Arial", 14, QFont::Normal);
 	QFontMetrics fMetrics(font);
-
-	m_nLeftMargin = fMetrics.width(QString::number(m_oCfg.nMaxFrequencyCount)) + 25;
-	m_nRightMargin = fMetrics.width(QString::number(m_oCfg.nMaxValue)) / 2 + 10;
+	
+	//nMaxFrequencyCount
+	m_nLeftMargin = fMetrics.width(QString::number(pHistogramData->aFrequencyTable.count())) + 25;
+	m_nRightMargin = fMetrics.width(QString::number(pHistogramData->nMaxValue)) / 2 + 10;
 	m_nTopMargin = fMetrics.height();
 	m_nBottomMargin = fMetrics.height() * 2;
 
@@ -46,7 +53,7 @@ void CHistogramPainter::drawHeader(QPainter *pPainter)
 	pPainter->setPen(QPen(Qt::darkGray, 1, Qt::SolidLine));
 	pPainter->drawLine(0, m_nHeaderHeight, nHeaderWidth, m_nHeaderHeight);
 	pPainter->setFont(font);
-	pPainter->drawText(rect, Qt::AlignCenter, m_sTitle);
+	pPainter->drawText(rect, Qt::AlignCenter, m_oHistogramData->sName);
 
 	pPainter->restore();
 
@@ -96,10 +103,10 @@ void CHistogramPainter::drawAxes(QPainter *pPainter)
 
 	// calculate Left margin size
 	int nMaxNumber = 0;
-	for (int i = 0; i < m_oHistogramData.aFrequencyTable.count(); ++i)
+	for (int i = 0; i < m_oHistogramData->aFrequencyTable.count(); ++i)
 	{
-		if (m_oHistogramData.aFrequencyTable[i] > nMaxNumber)
-			nMaxNumber = m_oHistogramData.aFrequencyTable[i];
+		if (m_oHistogramData->aFrequencyTable[i] > nMaxNumber)
+			nMaxNumber = m_oHistogramData->aFrequencyTable[i];
 	}
 	int nLeftMargin = fMetrics.width(QString::number(nMaxNumber)) + nBottomMargin;
 
@@ -128,16 +135,16 @@ void CHistogramPainter::drawAxes(QPainter *pPainter)
 	}
 	
 	// X axis
-	int nTextWidth = fMetrics.width(QString::number(m_oHistogramData.nMaxValue));
+	int nTextWidth = fMetrics.width(QString::number(m_oHistogramData->nMaxValue));
 	int nXSize = m_oRect.width() - nLeftMargin - nTextWidth;
 	pPainter->drawLine(QLine(0, 0, nXSize, 0));
 	
-	int nXOffset = qCeil(nXSize / m_oHistogramData.nBinsCount);
-	int nXCordinatesOffset = m_oHistogramData.nBinsRange;
+	int nXOffset = qCeil(nXSize / m_oHistogramData->nBinsCount);
+	int nXCordinatesOffset = m_oHistogramData->nBinsRange;
 
 	int nIndex = 0;
-	int nBinScale = qCeil(nYSize / 9) / nYCordinateOffset;
-	for (int nX = 0, nXCordinate = m_oHistogramData.nMinValue; nX <= nXSize; nX += nXOffset, nXCordinate += nXCordinatesOffset)
+	double nBinScale = double(nYSize / 9) / nYCordinateOffset;
+	for (int nX = 0, nXCordinate = m_oHistogramData->nMinValue; nX <= nXSize; nX += nXOffset, nXCordinate += nXCordinatesOffset)
 	{
 		int nTextWidth = fMetrics.width(QString::number(nXCordinate));
 		int nTextHeight = fMetrics.height();
@@ -156,7 +163,7 @@ void CHistogramPainter::drawAxes(QPainter *pPainter)
 	pPainter->restore();
 }
 
-void CHistogramPainter::drawBin(QPainter *pPainter, int nBinIndex, QPair<int, int> range, int nScale)
+void CHistogramPainter::drawBin(QPainter *pPainter, int nBinIndex, QPair<int, int> range, double nScale)
 {
 	pPainter->save();
 
@@ -164,14 +171,13 @@ void CHistogramPainter::drawBin(QPainter *pPainter, int nBinIndex, QPair<int, in
 	pPainter->setOpacity(0.6);
 	pPainter->setBrush(Qt::blue);
 
-	int nHeight = -(m_oHistogramData.aFrequencyTable[nBinIndex] * nScale);
+	if (nBinIndex >= m_oHistogramData->aFrequencyTable.count())
+		nBinIndex = m_oHistogramData->aFrequencyTable.count() - 1;
+
+	int nHeight = -(m_oHistogramData->aFrequencyTable[nBinIndex] * nScale);
 
 	pPainter->drawRect(range.first, 0, range.second, nHeight);
 
 	pPainter->restore();
 }
-
-void CHistogramPainter::setTitle(const QString sTitle)
-{
-	m_sTitle = sTitle;
-}
+////////////////////////////////////////////////////////////////////////////////

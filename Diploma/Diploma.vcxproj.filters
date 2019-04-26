@@ -33,54 +33,39 @@
     <ClCompile Include="MainWIndow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainWorkspaceWidget.cpp">
+    <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpreadSheetPaneWidget.cpp">
+    <ClCompile Include="ChartController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColSelectorWidget.cpp">
+    <ClCompile Include="Chart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Histogram.cpp">
+    <ClCompile Include="ChartModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HistogramPaneWidget.cpp">
+    <ClCompile Include="ChartPainter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HistogramPainter.cpp">
+    <ClCompile Include="ChartView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HistogramReviewPaneWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="flowLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HistogramController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HistogramModel.cpp">
+    <ClCompile Include="ChartReviewPane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="MainWIndow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="MainWorkspaceWidget.h">
+    <QtMoc Include="ChartView.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SpreadSheetPaneWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="ColSelectorWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="HistogramPaneWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="HistogramReviewPaneWidget.h">
+    <QtMoc Include="ChartReviewPane.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -90,20 +75,23 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Histogram.h">
+    <ClInclude Include="Definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HistogramPainter.h">
+    <ClInclude Include="ChartController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="flowLayout.h">
+    <ClInclude Include="Chart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HistogramController.h">
+    <ClInclude Include="ChartModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HistogramModel.h">
+    <ClInclude Include="ChartPainter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
